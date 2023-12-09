@@ -80,9 +80,35 @@ void move_file(std::string sourcePath, std::string destinationPath, std::string 
     }
 }
 
-void open_file(const std::string fname) {
-    std::wstring Wfname = stringToWideString(fname);
-    std::wstring Wpath = stringToWideString(path);
-    std::wstring fullPath = Wpath + L"/" + Wfname;
-    ShellExecuteW(NULL, L"open", fullPath.c_str(), NULL, NULL, SW_SHOWNORMAL);
+void open_file(const std::string fname, std::string openWith) {
+    if (openWith == "-none") {
+        std::wstring Wfname = stringToWideString(fname);
+        std::wstring Wpath = stringToWideString(path);
+        std::wstring fullPath = Wpath + L"/" + Wfname;
+        ShellExecuteW(NULL, L"open", fullPath.c_str(), NULL, NULL, SW_SHOWNORMAL);
+        std::cout << "Opened " << fname << "\n";
+    }
+    else {
+        std::string cmd = openWith + " " + path + "/" + fname;
+        int result = system(cmd.c_str());
+
+        if (result == -1) {
+            std::cout << "Command execution failed\n";
+        }
+        else if (result != 0) {
+            std::cout << "Couldn't open " << fname << " with " << openWith << "\n";
+        }
+        else {
+            std::cout << "Opened " << fname << " with " << openWith << "\n";
+        }
+    }
+}
+
+void remove_file(const std::string fname) {
+    if (std::remove(fname.c_str()) == 0) {
+        std::cout << "File successfully deleted\n";
+    }
+    else {
+        std::cout << "Error: Cannot delete file\n";
+    }
 }

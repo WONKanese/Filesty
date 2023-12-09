@@ -52,7 +52,19 @@ void read_input(std::string input) {
         std::cout << "\033[2J\033[1;1H";
     }
     else if (tokens[0] == "of") {
-        open_file(tokens[1]);
+        if (tokens.size() > 2) 
+        {
+            open_file(tokens[1], input.substr(4 + tokens[1].length()));
+            return;
+        }
+        open_file(input.substr(3));
+        
+    }
+    else if (tokens[0] == "rd") {
+        remove_directory(input.substr(3));
+    }
+    else if (tokens[0] == "rf") {
+        remove_file(tokens[1]);
     }
     else if (tokens[0] == "mf") {
         if (tokens.size() == 4) {

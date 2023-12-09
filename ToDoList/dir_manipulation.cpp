@@ -44,3 +44,31 @@ void create_directory(std::string dirpath) {
         std::cout << "Error: " << e.what() << std::endl;
     }
 }
+
+void remove_directory(std::string dirpath) {
+    std::string confirm;
+    std::cout << "Are you sure? (y/n): ";
+    std::cin >> confirm;
+
+    if (confirm != "y") {
+        std::cout << "Stopped command\n";
+    }
+
+
+    try {
+        if (fs::remove_all(path + "/" + dirpath) != 0) {
+            std::cout << "Removed Directory " << dirpath << "\n";
+        }
+        else if (fs::remove_all(dirpath) != 0) {
+            std::cout << "Removed Directory " << dirpath << "\n";
+        }
+        else {
+            std::cout << "Couldn't remove or find directory: " << dirpath << "\n";
+        }
+        std::cout << "Directory successfully deleted\n";
+    }
+    catch (const std::filesystem::filesystem_error& ex) {
+        std::cerr << "Filesystem error: " << ex.what() << '\n';
+        // Handle the error as needed
+    }
+}

@@ -59,5 +59,7 @@ void show_help() {
     std::cout << "cf [file name] --- creates a file with the name [file name]\n* must specify file type in the name\n\n";
     std::cout << "mf [source file] [destination] {shortcut} --- moves a file with the path [source file] (with name) into the directory [destination]\n* Must specify file type in the file name\n* {shortcut} decides which input should have current path added to it (-s = source -d = destination -b = both)\n\n";
     std::cout << "md [directory] --- creates a directory called [directory]\n\n";
-    std::cout << "of [file name] --- opens a file named [file name]\n* the file name must include the file type\n\n";
+    std::cout << "of [file name] {with} --- opens a file named [file name]\n* the file name must include the file type\n* {with} specifies what the file should be opened with\n\n";
+    std::cout << "rd [directory] --- trys to remove a directory named [directory]\n* Will probably not work due to your antivirus\n\n";
+    std::cout << "rf [file name] --- trys to remove a file with the name [file name]\n* must specify file type in the name\n\n";
 }
